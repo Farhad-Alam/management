@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import Data from "./routes/DataRoute.js";
 
+
 const app = express();
 
 // Env file
@@ -24,9 +25,9 @@ app.use("/api/v1", Data);
 
 // static files (build of your frontend)
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client', 'build')));
+  app.use(express.static(path.join(__dirname, '../client/build')));
   app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client', 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
   })
 }
 
