@@ -6,9 +6,7 @@ import Data from "./routes/DataRoute.js";
 const app = express();
 
 // Env file
-if (process.env.NODE_ENV !== "production") {
-  dotenv.config({ path: "server/config/config.env" });
-}
+dotenv.config({ path: "server/config/config.env" });
 
 // middlewares
 app.use(express.json({ limit: "50mb" }));
