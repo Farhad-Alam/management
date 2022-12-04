@@ -2,7 +2,6 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import Data from "./routes/DataRoute.js";
-import path from "path";
 
 const app = express();
 
@@ -16,13 +15,11 @@ app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(cors());
 
+app.get("/", (req, res) => {
+  res.send("This is backend");
+});
+
 // importing routes
 app.use("/api/v1", Data);
-
-// Deploy to Server
-app.use(express.static(path.join(__dirname, "../client/build")));
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/build/index.html"));
-});
 
 export { app };
