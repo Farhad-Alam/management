@@ -1,14 +1,13 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export const getData = async () => {
-  const { data } = await axios.get(`/api/v1/get`);
+  const { data } = await axios.get(`/get`);
   return data;
 };
 export const getSingleData = async (id) => {
   console.log(id);
-  const { data } = await axios.get(
-    `/api/v1/get/${id}`
-  );
+  const { data } = await axios.get(`/get/${id}`);
   return data;
 };
 
@@ -17,7 +16,7 @@ export const postData = async (formData) => {
     const { name, sector, term } = formData;
 
     const { data } = await axios.post(
-      `/api/v1/create`,
+      `/create`,
       { name, sector, term },
       {
         headers: {
@@ -36,7 +35,7 @@ export const updateData = async (userId, formData) => {
     const { name, sector, term } = formData;
 
     const { data } = await axios.put(
-      `/api/v1/update/${userId}`,
+      `/update/${userId}`,
       { name, sector, term },
       {
         headers: {
@@ -52,10 +51,9 @@ export const updateData = async (userId, formData) => {
 };
 export const deleteData = async (formId) => {
   try {
-    const { data } = await axios.delete(
-      `/api/v1/delete/${formId}`
-    );
-    console.log(data);
+    const { data } = await axios.delete(`/delete/${formId}`);
+
+    toast.success(data.msg);
     return data;
   } catch (error) {
     console.log(error);
